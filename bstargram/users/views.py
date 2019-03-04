@@ -58,7 +58,7 @@ class UserProfile(APIView):
 
         try:
             selected_user = models.User.objects.get(username=user_name)
-        except models.User.DoesNotExist():
+        except models.User.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = UserProfile_serializers.UserProfileSerializer(selected_user)
