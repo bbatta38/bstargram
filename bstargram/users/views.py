@@ -11,7 +11,7 @@ class ExploreUsers(APIView):
 
         lastest_user = models.User.objects.all().order_by('-date_joined')[:5]
 
-        serializer = serializers.ExploreUserSerializer(lastest_user, many=True)
+        serializer = serializers.ListUserSerializer(lastest_user, many=True)
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -63,4 +63,36 @@ class UserProfile(APIView):
 
         serializer = UserProfile_serializers.UserProfileSerializer(selected_user)
         
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+class UserFollowers(APIView):
+
+    def get(self, request, user_name, format=None):
+
+        try:
+            selected_user = models.User.objects.get(username=user_name)
+        except models.User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        follower_users = selected_user.followers.all()
+
+        serializer = serializers.ListUserSerializer(follower_users, many=True)
+
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+
+class UserFollowing(APIView):
+
+    def get(self, request, user_name, format=None):
+
+        try:
+            selected_user = models.User.objects.get(username=user_name)
+        except models.User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+        following_users = selected_user.followings.all()
+
+        serializer = serializers.ListUserSerializer(following_users, many=True)
+
         return Response(data=serializer.data, status=status.HTTP_200_OK)

@@ -59,23 +59,3 @@ class ProfileImageSerializer(serializers.ModelSerializer):
       'likes_count',
       'comments_count',
     )
-
-class UserProfileSerializer(serializers.ModelSerializer):
-
-  images = ProfileImageSerializer(many=True)
-  
-  class Meta:
-    model = user_models.User
-    fields = (
-      'id',
-      'username',
-      'name',
-      'bio',
-      'website',
-      'profile_image',
-      'posts_count',
-      'followers_count',
-      'following_count',
-      'images',
-
-    )

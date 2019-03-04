@@ -2,7 +2,7 @@ from rest_framework import serializers
 from . import models
 from bstargram.images import serializers as image_serializer
 
-class ExploreUserSerializer(serializers.ModelSerializer):
+class ListUserSerializer(serializers.ModelSerializer):
 
   class Meta:
     model = models.User
