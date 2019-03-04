@@ -68,6 +68,7 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'rest_framework',
+    'taggit', # tags for photos
 ]
 LOCAL_APPS = [
     'bstargram.users.apps.UsersAppConfig',

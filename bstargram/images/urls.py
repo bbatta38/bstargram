@@ -27,5 +27,10 @@ urlpatterns = [
         regex=r'^comments/(?P<comment_id>[0-9]+)/$',
         view=views.Comment.as_view(),
         name="comments"
-    )
+    ),
+    url(
+        regex=r'^search/$',
+        view=views.Search.as_view(),
+        name="search"
+    ),
 ]

@@ -50,7 +50,7 @@ class ImageSerializer(serializers.ModelSerializer):
         'creator',
     )
 
-class ProfileImageSerializer(serializers.ModelSerializer):
+class CountImageSerializer(serializers.ModelSerializer):
   class Meta:
     model = models.Image
     fields = (
