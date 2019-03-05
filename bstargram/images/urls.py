@@ -33,4 +33,9 @@ urlpatterns = [
         view=views.Search.as_view(),
         name="search"
     ),
+    url(
+        regex=r'^(?P<image_id>[0-9]+)/comments/(?P<comment_id>[0-9]+)/$',
+        view=views.ModerateComment.as_view(),
+        name="moderate_comment"
+    ),
 ]

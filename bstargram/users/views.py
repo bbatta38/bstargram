@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from . import models, serializers
 from bstargram.images import serializers as UserProfile_serializers
+from bstargram.notifications import views as notification_views
 
 
 class ExploreUsers(APIView):
@@ -30,6 +31,8 @@ class FollowUsers(APIView):
         user.followers.add(user_to_follow)
 
         user.save()
+
+        notification_views.create_notification(user, user_to_follow, 'follow')
 
         return Response(status=status.HTTP_200_OK)
 
