@@ -19,6 +19,11 @@ urlpatterns = [
         name="unfollow_users",
     ),
     url(
+        regex=r"^search/$",
+        view=views.Search.as_view(),
+        name="search",
+    ),
+    url(
         regex=r"^(?P<user_name>\w+)/$",
         view=views.UserProfile.as_view(),
         name="user_profile",
