@@ -59,3 +59,12 @@ class CountImageSerializer(serializers.ModelSerializer):
       'likes_count',
       'comments_count',
     )
+
+
+class SmallImageSerializer(serializers.ModelSerializer):
+
+  class Meta:
+    model = models.Image
+    fields = (
+      'file',
+    )
