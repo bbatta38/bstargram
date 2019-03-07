@@ -34,5 +34,4 @@ class UserProfileSerializer(serializers.ModelSerializer):
         'followers_count',
         'following_count',
         'images',
-
     )

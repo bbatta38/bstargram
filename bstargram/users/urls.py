@@ -38,4 +38,9 @@ urlpatterns = [
         view=views.UserFollowing.as_view(),
         name="user_following",
     ),
+    url(
+        regex=r"^(?P<user_name>\w+)/password/$",
+        view=views.ChangePassword.as_view(),
+        name="change_password",
+    ),
 ]
