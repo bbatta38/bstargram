@@ -43,4 +43,9 @@ urlpatterns = [
         view=views.ChangePassword.as_view(),
         name="change_password",
     ),
+    url(
+        regex=r'^rest-auth/facebook/$',
+        view=views.FacebookLogin.as_view(),
+        name='fb_login'
+    ),
 ]
