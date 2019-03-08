@@ -403,7 +403,7 @@ module.exports = function (webpackEnv) {
                 importLoaders: 1,
                 sourceMap: isEnvProduction && shouldUseSourceMap,
                 modules: true,
-                camelCase: true,
+                camelCase: true, // add it to use camelcase by name of style (e.g. className={styles.appLogo} instead of className={styles["App-logo"]})
                 getLocalIdent: getCSSModuleLocalIdent,
               }),
             },
@@ -430,17 +430,19 @@ module.exports = function (webpackEnv) {
             {
               test: sassModuleRegex,
               use: getStyleLoaders({
-                importLoaders: 2,
-                sourceMap: isEnvProduction && shouldUseSourceMap,
-                modules: true,
-                camelCase: true,
-                getLocalIdent: getCSSModuleLocalIdent,
-              }, {
-                loader: require.resolve('sass-loader'),
-                options: {
-                  data: `@import "${paths.appSrc}/config/_variables.scss";`
-                }
-              }),
+                  importLoaders: 2,
+                  sourceMap: isEnvProduction && shouldUseSourceMap,
+                  modules: true,
+                  camelCase: true,
+                  getLocalIdent: getCSSModuleLocalIdent,
+                },
+                // add it use variable css 
+                {
+                  loader: require.resolve('sass-loader'),
+                  options: {
+                    data: `@import "${paths.appSrc}/config/_variables.scss";`
+                  }
+                }),
             },
             // "file" loader makes sure those assets get served by WebpackDevServer.
             // When you `import` an asset, you get its (virtual) filename.
