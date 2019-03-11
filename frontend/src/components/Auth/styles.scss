@@ -1,0 +1,45 @@
+.auth {
+    width: 100%;
+    max-width: $max-page-width;
+    margin: 0 auto;
+    display: flex;
+    min-height: 100%;
+    margin-top: 50px;
+    justify-content: center;
+    align-items: center;
+    .column {
+        width:40%;
+        &:last-child {
+            width: 35%;
+            margin-left: 35px;
+        }
+        .white-box {
+            padding: 15px;
+            @include borderbox(no);
+            text-align: center;
+            font-size:$normal-font-size;
+            p {
+                margin:15px 0;
+                .change-link {
+                    cursor: pointer;
+                    color: $dark-blue;
+                }
+            }
+        }
+        .app-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top:30px;
+            .app-store {
+                margin-top:30px;
+                img {
+                    height:40px;
+                }
+            }
+            span {
+                font-size: $normal-font-size;
+            }
+        }
+    }
+}
