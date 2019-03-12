@@ -1,0 +1,57 @@
+msgid ""
+msgstr ""
+
+"Language: kr"
+
+#: src/components/AuthForms/index.js
+msgid "username"
+msgstr "사용자이름"
+
+#: src/components/AuthForms/index.js
+msgid "password"
+msgstr "패스워드"
+
+#: src/components/AuthForms/index.js
+msgid "Log in"
+msgstr "로그인"
+
+#: src/components/Footer/index.js
+msgid "About Us"
+msgstr "회사소개"
+
+#: src/components/Footer/index.js
+msgid "Support"
+msgstr "도움"
+
+#: src/components/Footer/index.js
+msgid "Blog"
+msgstr "블로그"
+
+#: src/components/Footer/index.js
+msgid "Press"
+msgstr "기사소개"
+
+#: src/components/Footer/index.js
+msgid "API"
+msgstr "개발자"
+
+#: src/components/Footer/index.js
+msgid "Jobs"
+msgstr "포지션"
+
+#: src/components/Footer/index.js
+msgid "Privacy"
+msgstr "개인정보"
+
+#: src/components/Footer/index.js
+msgid "Terms"
+msgstr "약관"
+
+#: src/components/Footer/index.js
+msgid "Directory"
+msgstr "디렉토리"
+
+#: src/components/Footer/index.js
+msgid "Language"
+msgstr "언어설정"
+
