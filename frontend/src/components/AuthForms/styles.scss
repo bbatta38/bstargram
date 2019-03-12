@@ -1,0 +1,81 @@
+.form-component {
+    margin: 5px 0 25px;
+    padding-top: 80px;
+    display: flex;
+    flex-direction: column;
+    background:url('images/logo.png') no-repeat center 10px;
+    background-size: 174px 56px;
+    .form {
+        display: flex;
+        flex-direction: column;
+        .text-input {
+            margin-bottom:5px;
+            padding:9px 0 7px 8px;
+            border:1px solid #efefef;
+            border-radius: 3px;
+            background-color: $bg-color;
+            font-size: $normal-font-size;
+            font-weight: 400;
+            &:focus {
+                outline: none;
+                border:1px solid #b2b2b2;
+            }
+        }
+    }
+    .divider {
+        text-transform: uppercase;
+        color: $dark-grey;
+        font-weight: 600;
+        margin: 20px 0;
+        margin-bottom:20px;
+        position: relative;
+        &:before {
+            content: "";
+            position: absolute;
+            width: 42%;
+            background-color: $dark-grey;
+            height:1px; 
+            left:0;
+            top:6px;
+            opacity:0.8;
+        }
+        &:after {
+            content: "";
+            position: absolute;
+            width: 42%;
+            background-color: $dark-grey;
+            height:1px; 
+            right:0;
+            top:6px;
+            opacity:0.8;
+        }
+    }
+    .facebook-link {
+        display:flex;
+        align-items: center;
+        color: #385185;
+        justify-content: center;
+        margin-bottom: 30px;
+        svg {
+            margin-right:5px;
+        }
+    }
+    .forgot-pass {
+        font-size: $normal-font-size;
+        color: $dark-blue;
+    }
+
+    .button {
+        @include blueButton();
+    }
+
+    .comment {
+        margin-top: 20px;
+        font-size: $normal-font-size;
+        color: $dark-grey;
+        line-height:18px;
+        span {
+            font-weight: bold
+        }
+    }
+}

@@ -7,24 +7,52 @@
     margin-top: 50px;
     justify-content: center;
     align-items: center;
+    @include breakpoint("phone") {
+        margin-top:10px;
+    }
     .column {
         width:40%;
+        @include breakpoint("phone") {
+            &:first-child {
+                display: none;
+            }
+        }
+        @include breakpoint("tablet") {
+            &:first-child {
+                display: none;
+            }
+        }
         &:last-child {
             width: 35%;
             margin-left: 35px;
+            @include breakpoint("phone") {
+                width: 100%;
+                margin: 0;
+            }
+            @include breakpoint("tablet") {
+                width: 70%;
+                margin: 0;
+            }
         }
         .white-box {
             padding: 15px;
             @include borderbox(no);
             text-align: center;
             font-size:$normal-font-size;
-            p {
+            @include breakpoint("phone") {
+                background-color: transparent;
+                border: 0;
+            }
+            > p {
                 margin:15px 0;
                 .change-link {
                     cursor: pointer;
                     color: $dark-blue;
                 }
             }
+        }
+        .form-box {
+            margin-bottom:10px;
         }
         .app-box {
             display: flex;
