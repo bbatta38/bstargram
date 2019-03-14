@@ -77,7 +77,7 @@ THIRD_PARTY_APPS = [
     'corsheaders',  # to accept request from React
 ]
 LOCAL_APPS = [
-    'bstargram.users.apps.UsersAppConfig',
+    'bstargram.users.apps.UsersConfig',
     # Your stuff: custom apps go here
     'bstargram.images.apps.ImagesConfig',
     'bstargram.notifications.apps.NotificationsConfig'
@@ -271,7 +271,7 @@ REST_FRAMEWORK = {
 
 REST_USE_JWT = True
 ACCOUNT_LOGOUT_ON_GET = True
-
+SOCIALACCOUNT_QUERY_EMAIL = True
 CORS_ORIGIN_ALLOW_ALL = True
 
 JWT_AUTH = {
@@ -307,4 +307,8 @@ SOCIALACCOUNT_PROVIDERS = {
         'VERIFIED_EMAIL': True,
         'VERSION': 'v2.4'
     }
+}
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+    'REGISTER_SERIALIZER': 'bstargram.users.serializers.SignUpSerializer'
 }
