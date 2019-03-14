@@ -4,12 +4,12 @@ from . import views
 app_name = "users"
 urlpatterns = [
     url(
-        regex = r"^explore/$",
-        view = views.ExploreUsers.as_view(),
+        regex=r"^explore/$",
+        view=views.ExploreUsers.as_view(),
         name="exploreusers",
     ),
     url(
-        regex = r"^(?P<user_id>[0-9]+)/follow/$",
+        regex=r"^(?P<user_id>[0-9]+)/follow/$",
         view=views.FollowUsers.as_view(),
         name="follow_users",
     ),
@@ -44,7 +44,7 @@ urlpatterns = [
         name="change_password",
     ),
     url(
-        regex=r'^rest-auth/facebook/$',
+        regex=r'^login/facebook/$',
         view=views.FacebookLogin.as_view(),
         name='fb_login'
     ),
