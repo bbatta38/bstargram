@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import FacebookLogin from "react-facebook-login";
 import formStyles from "shared/formStyles.scss";
 
-const SignupForm = props => (
+const SignupForm = (props, context) => (
   <div className={formStyles.formComponent}>
     <FacebookLogin
       appId="589017464967692"
@@ -18,7 +18,7 @@ const SignupForm = props => (
       <input
         className={formStyles.textInput}
         type="email"
-        placeholder="Email"
+        placeholder={context.t("Email")}
         value={props.emailValue}
         onChange={props.handleInputChange}
         name="email"
@@ -26,7 +26,7 @@ const SignupForm = props => (
       <input
         className={formStyles.textInput}
         type="text"
-        placeholder="Name"
+        placeholder={context.t("Name")}
         value={props.nameValue}
         onChange={props.handleInputChange}
         name="name"
@@ -34,7 +34,7 @@ const SignupForm = props => (
       <input
         className={formStyles.textInput}
         type="username"
-        placeholder="Username"
+        placeholder={context.t("Username")}
         autoComplete="username"
         value={props.usernameValue}
         onChange={props.handleInputChange}
@@ -43,13 +43,17 @@ const SignupForm = props => (
       <input
         className={formStyles.textInput}
         type="password"
-        placeholder="Password"
+        placeholder={context.t("Password")}
         autoComplete="password"
         value={props.passwordValue}
         onChange={props.handleInputChange}
         name="password"
       />
-      <input className={formStyles.button} type="submit" value="Sign up" />
+      <input
+        className={formStyles.button}
+        type="submit"
+        value={context.t("Sign up")}
+      />
     </form>
     <p className={formStyles.comment}>
       By signing up, you agree to our <span>Terms & Privacy policy</span>.
