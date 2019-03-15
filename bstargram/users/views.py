@@ -75,9 +75,8 @@ class UserProfile(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
 
         serializer = serializers.UserProfileSerializer(selected_user)
-        
-        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     def put(self, request, user_name, format=None):
 
@@ -88,10 +87,10 @@ class UserProfile(APIView):
         if selected_user is None:
 
             return Response(status=status.HTTP_404_NOT_FOUND)
-        
+
         elif selected_user != user:
 
-            return Response(status=status.HTTP_401_UNAUTHORIZED)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
         else:
             serializer = serializers.UserProfileSerializer(selected_user, data=request.data, partial=True)
@@ -101,7 +100,7 @@ class UserProfile(APIView):
                 serializer.save()
 
                 return Response(data=serializer.data, status=status.HTTP_200_OK)
-            
+
             else:
 
                 return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -152,7 +151,7 @@ class Search(APIView):
             serializer = serializers.ListUserSerializer(users, many=True)
 
             return Response(data=serializer.data, status=status.HTTP_200_OK)
-        
+
         else:
 
             return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -183,7 +182,7 @@ class ChangePassword(APIView):
                         user.save()
 
                         return Response(status=status.HTTP_200_OK)
-                    
+
                     else:
 
                         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -198,7 +197,7 @@ class ChangePassword(APIView):
 
         else:
 
-            return Response(status=status.HTTP_401_UNAUTHORIZED)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class FacebookLogin(SocialLoginView):
