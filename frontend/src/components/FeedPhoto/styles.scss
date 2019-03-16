@@ -1,0 +1,52 @@
+.feed-photo {
+  @include borderbox(no);
+  width: 100%;
+  max-width: $max-card-width;
+  margin-bottom: 60px;
+  @include breakpoint("phone") {
+    background-color: transparent;
+    border: 0;
+    margin-bottom: 30px;
+  }
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .header {
+    display: flex;
+    flex-direction: row;
+    height: 60px;
+    padding: 16px;
+    align-items: center;
+    border-bottom: 0.5px solid $light-grey;
+    .image {
+      width: 30px;
+      height: 30px;
+      background-color: #fafafa;
+      border: 1px solid $dark-grey;
+      border-radius: 50%;
+    }
+    .header-column {
+      display: flex;
+      flex-direction: column;
+      margin-left: 12px;
+      .creator {
+        color: #262626;
+        font-size: $normal-font-size;
+        font-weight: 600;
+      }
+      .location {
+        font-size: $small-font-size;
+        line-height: 15px;
+      }
+    }
+  }
+  .main-image {
+    width: 100%;
+    background-color: #fff;
+  }
+  .meta {
+    padding: 15px;
+    padding-bottom: 0;
+    padding-top: 10px;
+  }
+}

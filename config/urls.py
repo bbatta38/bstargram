@@ -32,7 +32,7 @@ urlpatterns = [
     path("rest-auth/", include("rest_auth.urls")),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     # Your stuff: custom urls includes go here
-    re_path("", views.ReactAppView.as_view()),
+    path("", views.ReactAppView.as_view()),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
