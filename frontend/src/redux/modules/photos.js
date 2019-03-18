@@ -4,6 +4,8 @@ import { actionCreators as userActions } from "redux/modules/user";
 // actions
 
 const SET_FEED = "SET_FEED";
+const LIKE_PHOTO = "LIKE_PHOTO";
+const UNLIKE_PHOTO = "UNLIKE_PHOTO";
 
 // action creators
 
@@ -11,6 +13,20 @@ function setFeed(feed) {
   return {
     type: SET_FEED,
     feed
+  };
+}
+
+function doLikePhoto(photoId) {
+  return {
+    type: LIKE_PHOTO,
+    photoId
+  };
+}
+
+function doUnLikePhoto(photoId) {
+  return {
+    type: UNLIKE_PHOTO,
+    photoId
   };
 }
 
@@ -37,6 +53,18 @@ function getFeed() {
   };
 }
 
+function likePhoto(photoId) {
+  return (dispatch, getState) => {
+    dispatch(doLikePhoto(photoId));
+  };
+}
+
+function unLikePhoto(photoId) {
+  return (dispatch, getState) => {
+    dispatch(doUnLikePhoto(photoId));
+  };
+}
+
 // initial states
 
 const initialState = {};
@@ -46,6 +74,10 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_FEED:
       return applySetFeed(state, action);
+    case LIKE_PHOTO:
+      return applyLikePhoto(state, action);
+    case UNLIKE_PHOTO:
+      return applyUnLikePhoto(state, action);
     default:
       return state;
   }
@@ -61,9 +93,40 @@ function applySetFeed(state, action) {
   };
 }
 
+function applyLikePhoto(state, action) {
+  const { photoId } = action;
+  const { feed } = state;
+  const updatedFeed = feed.map(photo => {
+    if (photo.id === photoId) {
+      return { ...photo, is_liked: true, likes_count: photo.likes_count + 1 };
+    } else {
+      return photo;
+    }
+  });
+  return {
+    ...state,
+    feed: updatedFeed
+  };
+}
+
+function applyUnLikePhoto(state, action) {
+  const { photoId } = action;
+  const { feed } = state;
+  const updatedFeed = feed.map(photo => {
+    if (photo.id === photoId) {
+      return { ...photo, is_liked: false, likes_count: photo.likes_count - 1 };
+    } else {
+      return photo;
+    }
+  });
+  return {
+    ...state,
+    feed: updatedFeed
+  };
+}
+
 const actionCreators = {
-  getFeed,
-  setFeed
+  getFeed
 };
 
 export { actionCreators };
