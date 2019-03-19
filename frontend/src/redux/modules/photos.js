@@ -6,6 +6,7 @@ import { actionCreators as userActions } from "redux/modules/user";
 const SET_FEED = "SET_FEED";
 const LIKE_PHOTO = "LIKE_PHOTO";
 const UNLIKE_PHOTO = "UNLIKE_PHOTO";
+const ADD_COMMENT = "ADD_COMMENT";
 
 // action creators
 
@@ -27,6 +28,14 @@ function doUnLikePhoto(photoId) {
   return {
     type: UNLIKE_PHOTO,
     photoId
+  };
+}
+
+function addComment(photoId, message) {
+  return {
+    type: ADD_COMMENT,
+    photoId,
+    message
   };
 }
 
@@ -95,6 +104,36 @@ function unLikePhoto(photoId) {
   };
 }
 
+function submitComment(photoId, message) {
+  return (dispatch, getState) => {
+    const {
+      user: { token }
+    } = getState();
+    fetch(`/images/${photoId}/comments/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`,
+        "Content-type": "application/json"
+      },
+      body: JSON.stringify({
+        message
+      })
+    })
+      .then(response => {
+        if (response.status === 401) {
+          dispatch(userActions.logout());
+        } else {
+          return response.json();
+        }
+      })
+      .then(json => {
+        if (json.message) {
+          dispatch(addComment(photoId, json));
+        }
+      });
+  };
+}
+
 // initial states
 
 const initialState = {};
@@ -108,6 +147,8 @@ const reducer = (state = initialState, action) => {
       return applyLikePhoto(state, action);
     case UNLIKE_PHOTO:
       return applyUnLikePhoto(state, action);
+    case ADD_COMMENT:
+      return applyAddComment(state, action);
     default:
       return state;
   }
@@ -155,10 +196,30 @@ function applyUnLikePhoto(state, action) {
   };
 }
 
+function applyAddComment(state, action) {
+  const { photoId, message } = action;
+  const { feed } = state;
+  const updatedFeed = feed.map(photo => {
+    if (photo.id === photoId) {
+      return {
+        ...photo,
+        comments: [...photo.comments, message]
+      };
+    } else {
+      return photo;
+    }
+  });
+  return {
+    ...state,
+    feed: updatedFeed
+  };
+}
+
 const actionCreators = {
   getFeed,
   likePhoto,
-  unLikePhoto
+  unLikePhoto,
+  submitComment
 };
 
 export { actionCreators };
