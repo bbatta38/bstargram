@@ -103,7 +103,6 @@ function getUserList(photoId) {
     const {
       user: { token }
     } = getState();
-    console.log(token);
     fetch(`/images/${photoId}/likes/`, {
       method: "GET",
       headers: {
