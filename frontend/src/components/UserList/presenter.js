@@ -31,7 +31,13 @@ const LoadingUserList = () => (
   </div>
 );
 const RenderUserList = props => {
-  return props.userList.map(user => <UserRow {...user} key={user.id} />);
+  return (
+    <div className={styles.listContainer}>
+      {props.userList.map(user => (
+        <UserRow {...user} key={user.id} />
+      ))}
+    </div>
+  );
 };
 
 UserList.propTypes = {

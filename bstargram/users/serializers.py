@@ -30,14 +30,33 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class ListUserSerializer(serializers.ModelSerializer):
 
+    following = serializers.SerializerMethodField()
+    isMe = serializers.SerializerMethodField()
+
     class Meta:
         model = models.User
         fields = (
             'id',
             'profile_image',
             'username',
-            'name'
+            'name',
+            'following',
+            'isMe'
         )
+
+    def get_following(self, obj):
+        if "request" in self.context:
+            request = self.context["request"]
+            if obj in request.user.followings.all():
+                return True
+        return False
+
+    def get_isMe(self, obj):
+        if "request" in self.context:
+            request = self.context["request"]
+            if obj.username == request.user.username:
+                return True
+        return False
 
 
 class SignUpSerializer(RegisterSerializer):

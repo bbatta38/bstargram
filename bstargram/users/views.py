@@ -13,7 +13,7 @@ class ExploreUsers(APIView):
 
         lastest_user = models.User.objects.all().order_by('-date_joined')[:5]
 
-        serializer = serializers.ListUserSerializer(lastest_user, many=True)
+        serializer = serializers.ListUserSerializer(lastest_user, many=True, context={"request": request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -117,7 +117,7 @@ class UserFollowers(APIView):
 
         follower_users = selected_user.followers.all()
 
-        serializer = serializers.ListUserSerializer(follower_users, many=True)
+        serializer = serializers.ListUserSerializer(follower_users, many=True, context={"request": request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -133,7 +133,7 @@ class UserFollowing(APIView):
 
         following_users = selected_user.followings.all()
 
-        serializer = serializers.ListUserSerializer(following_users, many=True)
+        serializer = serializers.ListUserSerializer(following_users, many=True, context={"request": request})
 
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
@@ -148,7 +148,7 @@ class Search(APIView):
 
             users = models.User.objects.filter(username__icontains=username)
 
-            serializer = serializers.ListUserSerializer(users, many=True)
+            serializer = serializers.ListUserSerializer(users, many=True, context={"request": request})
 
             return Response(data=serializer.data, status=status.HTTP_200_OK)
 

@@ -2,16 +2,24 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 8px 16px;
+  padding: 8px 0;
   width: 100%;
   box-sizing: border-box;
+  border-bottom: 1px solid $light-grey;
   .column {
     display: flex;
     align-items: center;
     .user {
+      display: flex;
+      flex-direction: column;
       margin-left: 10px;
       .username {
         font-weight: 600;
+        margin-bottom: 3px;
+      }
+      .name {
+        font-size: $small-font-size;
+        color: $dark-grey;
       }
     }
     .bigAvatar {
@@ -21,9 +29,13 @@
     .avatar {
       width: 30px;
       border-radius: 50%;
+      border: 1px solid $dark-grey;
     }
     .button {
       @include blueButton();
+    }
+    .white-button {
+      @include whiteButton();
     }
   }
 }
