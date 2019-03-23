@@ -5,6 +5,8 @@
 const SAVE_TOKEN = "SAVE_TOKEN";
 const LOG_OUT = "LOG_OUT";
 const SET_USER_LIST = "SET_USER_LIST";
+const FOLLOW_USER = "FOLLOW_USER";
+const UNFOLLOW_USER = "UNFOLLOW_USER";
 
 // action creators
 
@@ -25,6 +27,20 @@ function setUserList(userList) {
   return {
     type: SET_USER_LIST,
     userList
+  };
+}
+
+function setFollowUser(userId) {
+  return {
+    type: FOLLOW_USER,
+    userId
+  };
+}
+
+function setUnfollowUser(userId) {
+  return {
+    type: UNFOLLOW_USER,
+    userId
   };
 }
 
@@ -123,6 +139,50 @@ function getUserList(photoId) {
   };
 }
 
+function followUser(userId) {
+  return (dispatch, getState) => {
+    dispatch(setFollowUser(userId));
+    const {
+      user: { token }
+    } = getState();
+    fetch(`/users/${userId}/follow/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`,
+        "content-Type": "application/json"
+      }
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(logout());
+      } else if (!response.ok) {
+        dispatch(setUnfollowUser(userId));
+      }
+    });
+  };
+}
+
+function unfollowUser(userId) {
+  return (dispatch, getState) => {
+    dispatch(setUnfollowUser(userId));
+    const {
+      user: { token }
+    } = getState();
+    fetch(`/users/${userId}/unfollow/`, {
+      method: "POST",
+      headers: {
+        Authorization: `JWT ${token}`,
+        "content-Type": "application/json"
+      }
+    }).then(response => {
+      if (response.status === 401) {
+        dispatch(logout());
+      } else if (!response.ok) {
+        dispatch(setFollowUser(userId));
+      }
+    });
+  };
+}
+
 // initial state
 
 const initialState = {
@@ -140,6 +200,10 @@ function reducer(state = initialState, action) {
       return applyLogout(state, action);
     case SET_USER_LIST:
       return applySetUserList(state, action);
+    case FOLLOW_USER:
+      return applyFollowUser(state, action);
+    case UNFOLLOW_USER:
+      return applyUnfollowUser(state, action);
     default:
       return state;
   }
@@ -171,6 +235,40 @@ function applySetUserList(state, action) {
     userList
   };
 }
+function applyFollowUser(state, action) {
+  const { userId } = action;
+  const { userList } = state;
+  const updateList = userList.map(user => {
+    if (user.id === userId) {
+      return {
+        ...user,
+        following: true
+      };
+    }
+    return user;
+  });
+  return {
+    ...state,
+    userList: updateList
+  };
+}
+function applyUnfollowUser(state, action) {
+  const { userId } = action;
+  const { userList } = state;
+  const updateList = userList.map(user => {
+    if (user.id === userId) {
+      return {
+        ...user,
+        following: false
+      };
+    }
+    return user;
+  });
+  return {
+    ...state,
+    userList: updateList
+  };
+}
 
 // exports
 
@@ -179,7 +277,9 @@ const actionCreators = {
   usernameLogin,
   createAccount,
   logout,
-  getUserList
+  getUserList,
+  followUser,
+  unfollowUser
 };
 
 export { actionCreators };

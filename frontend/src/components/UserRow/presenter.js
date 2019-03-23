@@ -16,16 +16,29 @@ const UserRow = props => (
       </div>
     </div>
     <div className={styles.column}>
-      {props.isMe ? null : <FollowBtn following={props.following} />}
+      {props.isMe ? null : (
+        <FollowBtn
+          following={props.following}
+          handleClick={props.handleClick}
+        />
+      )}
     </div>
   </div>
 );
 
 const FollowBtn = props => {
   if (props.following) {
-    return <button className={styles.whiteButton}>Following</button>;
+    return (
+      <button className={styles.whiteButton} onClick={props.handleClick}>
+        Following
+      </button>
+    );
   } else {
-    return <button className={styles.button}>Follow</button>;
+    return (
+      <button className={styles.button} onClick={props.handleClick}>
+        Follow
+      </button>
+    );
   }
 };
 
@@ -34,7 +47,8 @@ UserRow.propTypes = {
   username: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   following: PropTypes.bool.isRequired,
-  isMe: PropTypes.bool.isRequired
+  isMe: PropTypes.bool.isRequired,
+  handleClick: PropTypes.func.isRequired
 };
 
 export default UserRow;
