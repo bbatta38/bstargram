@@ -1,0 +1,9 @@
+.explore {
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: $max-card-width;
+  align-items: center;
+  @include borderbox("no");
+}

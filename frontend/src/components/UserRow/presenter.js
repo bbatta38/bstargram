@@ -8,7 +8,7 @@ const UserRow = props => (
       <img
         src={props.profile_image || require("images/noPhoto.png")}
         alt={props.username}
-        className={styles.avatar}
+        className={props.big ? styles.bigAvatar : styles.avatar}
       />
       <div className={styles.user}>
         <span className={styles.username}>{props.username}</span>
