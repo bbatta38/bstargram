@@ -10,14 +10,8 @@ class Container extends Component {
     getExplore: PropTypes.func.isRequired
   };
   componentDidMount() {
-    const { getExplore, userList } = this.props;
-    if (!userList) {
-      getExplore();
-    } else {
-      this.setState({
-        loading: false
-      });
-    }
+    const { getExplore } = this.props;
+    getExplore();
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.userList) {

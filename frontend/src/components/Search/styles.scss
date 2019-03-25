@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  max-width: $max-page-width;
+  margin: 50px auto;
+  .list-container {
+    margin-bottom: 30px;
+    .title {
+      text-align: left;
+      color: $dark-grey;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
+    .not-found {
+      text-align: center;
+      width: 100%;
+      display: block;
+      font-weight: 600;
+    }
+    .user-list {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+}

@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./styles.scss";
 
 const UserRow = props => (
-  <div className={styles.container}>
+  <div className={props.vertical ? styles.verticalContainer : styles.container}>
     <div className={styles.column}>
       <img
         src={props.profile_image || require("images/noPhoto.png")}
