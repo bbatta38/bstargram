@@ -75,6 +75,7 @@ class CountImageSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'file',
+            'caption',
             'likes_count',
             'comments_count',
         )
